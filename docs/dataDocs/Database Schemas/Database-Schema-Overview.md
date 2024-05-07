@@ -2,7 +2,7 @@
 
 This document outlines the database schema for the AppSheet application designed to manage an extensive car model collection, including car model details, events, user interactions, and a detailed history log.
 
-![Database Schema Overview](assets/images/diagrams/Table-Schema-Overview-Diagram_01.png)
+![Database Schema Overview](../../../../assets/images/diagrams/Table-Schema-Overview-Diagram_01.png)
 
 ## 1. Collection Main Table
 
