@@ -1,9 +1,0 @@
-0000000000000000000000000000000000000000 85ec7c39fef5dfe96c3584fb5af20b6e1e24410d 5rusenko <m.s.petrusenko@gmail.com> 1713288125 +0300	commit (initial): Initial commit
-85ec7c39fef5dfe96c3584fb5af20b6e1e24410d 9ef783f943faa109a3d2fd2ecd4a99f815c52616 5rusenko <m.s.petrusenko@gmail.com> 1713288668 +0300	commit: Initial commit
-9ef783f943faa109a3d2fd2ecd4a99f815c52616 2ded9aa61f64f250a02dbef62a8e03813a42bdca 5rusenko <m.s.petrusenko@gmail.com> 1713817154 +0300	commit: adding notebook as .md
-2ded9aa61f64f250a02dbef62a8e03813a42bdca 75d2b6880fa6741e9a1c2946f228d54a83f6b762 5rusenko <m.s.petrusenko@gmail.com> 1713817202 +0300	commit: Adding cars catalogue .md
-75d2b6880fa6741e9a1c2946f228d54a83f6b762 4cd6f7bbccd8b34071be979271fd6039d7e301f1 5rusenko <m.s.petrusenko@gmail.com> 1713817304 +0300	commit: updated readme.md with info from notebook
-4cd6f7bbccd8b34071be979271fd6039d7e301f1 c1d3e9ca4fdc252f050f8ab420e26c3e9a8a78dc 5rusenko <m.s.petrusenko@gmail.com> 1713817316 +0300	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
-c1d3e9ca4fdc252f050f8ab420e26c3e9a8a78dc c81621bc684593efedd5cb96c8d9bdc9ba180baa 5rusenko <m.s.petrusenko@gmail.com> 1713817343 +0300	commit: commit
-c81621bc684593efedd5cb96c8d9bdc9ba180baa 80e332a2e180fb359115333d721678a5511f08b6 5rusenko <m.s.petrusenko@gmail.com> 1713817366 +0300	commit: commit
-80e332a2e180fb359115333d721678a5511f08b6 73e7e15c45c088c35590ea5e0ab935698f83705a 5rusenko <m.s.petrusenko@gmail.com> 1713817378 +0300	commit: commit

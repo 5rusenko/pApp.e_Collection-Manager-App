@@ -1,0 +1,49 @@
+# Project Outline for "pApp.e" - Car Model Collection Management App
+
+## Overview
+This document outlines the development phases for "pApp.e," an AppSheet-based application designed to manage and catalog an extensive car model collection. The project is structured into three main phases, focusing on preparing the existing data, setting up the database, and developing the application.
+
+## Phase 1: Existing Data Preparation
+[to fill details later]
+
+## Phase 2: Database Setup
+
+### Objective
+To structure and setup the underlying database which will store and manage the car model data effectively.
+
+### Tasks
+- **Google Sheets Configuration**: Establish a well-structured Google Sheets document as the database for AppSheet. This includes:
+  - **Main Table**: Set up columns for ID, Model Name, Manufacturer, Scale, Year, Condition, Status, Price, Buyer Details, etc.
+  - **Reference Tables**: Create additional tables for dropdowns and references, such as manufacturers and scales, to ensure data integrity and ease of maintenance.
+
+### Expected Outputs
+- A fully structured Google Sheets database ready to be connected to AppSheet.
+
+## Phase 3: App Development
+
+### Objective
+To develop and configure the AppSheet application to provide functionalities for adding, editing, and removing car models, as well as viewing and exporting the collection.
+
+### Tasks
+- **AppSheet Connection**: Connect the structured Google Sheets as a data source in AppSheet.
+- **Form Configuration**:
+  - Set up forms for adding new items with all necessary fields.
+  - Customize forms for editing and updating existing entries.
+- **Item Management Actions**:
+  - Implement actions for editing and removing items, including status updates for conditions like lost, stolen, broken, sold, or given away.
+- **Views and Filters**:
+  - Create a dashboard view with different components like gallery and table views for an interactive experience.
+  - Set up filtered views or "slices" to allow viewing subsets of the collection based on specific criteria.
+- **Data Export Functionality**: Enable features for exporting the collection data to CSV format for backups and external use.
+- **Testing and Adjustments**:
+  - Thoroughly test all app functionalities.
+  - Make necessary adjustments based on feedback to ensure the app meets all user requirements.
+
+### Expected Outputs
+- A fully functional AppSheet application tailored for managing and visualizing the car model collection.
+- User documentation and guides for operating the application.
+
+## Deployment and Sharing
+- **Final Testing**: Conduct final tests to ensure reliability and usability.
+- **Launch**: Deploy the app for use.
+- **User Training**: Provide training and support materials to users for effective use of the application.

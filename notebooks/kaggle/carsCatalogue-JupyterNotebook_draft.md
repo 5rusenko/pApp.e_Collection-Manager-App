@@ -22,17 +22,17 @@ We'll begin our journey by loading the dataset from an Excel file—kindly provi
 ```python
 import pandas as pd
 
-# Filepath
+### Filepath
 file_path = '/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx'
 
-# Load the data from the Excel file
+### Load the data from the Excel file
 data = pd.read_excel(file_path)
 
-# Display the structure of the DataFrame
+### Display the structure of the DataFrame
 print("Data Info:")
 data.info()
 
-# Display the first few rows to understand the data better
+### Display the first few rows to understand the data better
 print("First few rows of the dataset:")
 display(data.head())
 
@@ -66,29 +66,29 @@ In this process, we will create a new DataFrame where each row represents a uniq
 ```python
 import pandas as pd
 
-# Filepath
+### Filepath
 file_path = '/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx'
 
-# Load the dataset
+### Load the dataset
 data = pd.read_excel(file_path)
 
-# Melt the DataFrame to reformat it into two columns: 'Model_Manufacturer_name' and 'Collectible_item_full_name'
+### Melt the DataFrame to reformat it into two columns: 'Model_Manufacturer_name' and 'Collectible_item_full_name'
 melted_data = data.melt(var_name='Model_Manufacturer_name', value_name='Collectible_item_full_name')
 
-# Remove rows where 'Collectible_item_full_name' is null as they do not provide useful information
+### Remove rows where 'Collectible_item_full_name' is null as they do not provide useful information
 cleaned_data = melted_data.dropna(subset=['Collectible_item_full_name'])
 
-# Show the first few rows of the newly structured DataFrame and summary information
+### Show the first few rows of the newly structured DataFrame and summary information
 print("Summary Information of Cleaned Data:")
 cleaned_data_info = cleaned_data.info()
 
 print("\nFirst Few Rows of Cleaned Data:")
 cleaned_data_head = cleaned_data.head()
 
-# If you need to save or export the cleaned data:
+### If you need to save or export the cleaned data:
 cleaned_data.to_csv('/kaggle/working/cleaned_data_v1_2columns.csv', index=False)
 
-# Display the cleaned data head
+### Display the cleaned data head
 display(cleaned_data_head)
 
 ```
@@ -112,10 +112,10 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+### Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Function to extract brand, model, and year from the collectible item full name
+### Function to extract brand, model, and year from the collectible item full name
 def extract_info(text):
     pattern = r'^(?P<Brand>[\w\s-]+?)\s(?P<Model>.*?)\s(?P<Year>\d{4}(?:-\d{4})?)'
     match = re.match(pattern, str(text))
@@ -124,41 +124,41 @@ def extract_info(text):
     else:
         return None, None, None
 
-# Initialize an empty list to store the reshaped data
+### Initialize an empty list to store the reshaped data
 reshaped_rows = []
 
-# Iterate through each column of the original DataFrame
+### Iterate through each column of the original DataFrame
 for col in data.columns:
     # Extract manufacturer name from the column name
     manufacturer_name = col.split('_')[0]
-    # Iterate through each item in the column
+    ##Iterate through each item in the column
     for item in data[col]:
-        # Check if the item is not empty
+        ##Check if the item is not empty
         if pd.notna(item):
             brand, model, year = extract_info(item)
-            # Append a new row to the reshaped data list
+            ##Append a new row to the reshaped data list
             reshaped_rows.append({'Model_Manufacturer_name': manufacturer_name,
                                   'Collectible_item_full_name': item,
                                   'Brand': brand, 'Model': model, 'Year': year})
 
-# Convert the list of dictionaries to a DataFrame
+### Convert the list of dictionaries to a DataFrame
 reshaped_data = pd.DataFrame(reshaped_rows)
 
-# Filter for valid entries where 'Model_Manufacturer_name' is not missing
+### Filter for valid entries where 'Model_Manufacturer_name' is not missing
 valid_data = reshaped_data[reshaped_data['Model_Manufacturer_name'].notna()]
 
-# Count missing 'Brand' values in the valid data
+### Count missing 'Brand' values in the valid data
 missing_brands_count = valid_data[valid_data['Brand'].isnull()].shape[0]
 print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufacturer_name': {missing_brands_count}")
 
-# Count missing 'Year' values in the valid data
+### Count missing 'Year' values in the valid data
 missing_years_count = valid_data[valid_data['Year'].isnull()].shape[0]
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_years_count}")
 
-# If you need to save or export the cleaned data:
+### If you need to save or export the cleaned data:
 cleaned_data.to_csv('/kaggle/working/cleaned_data_v2_multiCol_1675-missing-brand.csv', index=False)
 
-# Display the reshaped data
+### Display the reshaped data
 display(reshaped_data)
 ```
 
@@ -179,10 +179,10 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+### Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Function to extract brand, model, and year from the collectible item full name
+### Function to extract brand, model, and year from the collectible item full name
 def extract_info(text):
     pattern = r'^(?P<Brand>[\w\s-]+?)\s(?P<Model>.*?)\s(?P<Year>\d{4}(?:-\d{4})?)'
     match = re.match(pattern, str(text))
@@ -191,45 +191,45 @@ def extract_info(text):
     else:
         return None, None, None
 
-# Initialize an empty list to store the reshaped data
+### Initialize an empty list to store the reshaped data
 reshaped_rows = []
 
-# Iterate through each column of the original DataFrame
+### Iterate through each column of the original DataFrame
 for col in data.columns:
-    # Extract manufacturer name from the column name
+    ##Extract manufacturer name from the column name
     manufacturer_name = col.split('_')[0]
-    # Iterate through each item in the column
+    ##Iterate through each item in the column
     for item in data[col]:
-        # Check if the item is not empty
+        ##Check if the item is not empty
         if pd.notna(item):
             brand, model, year = extract_info(item)
-            # Append a new row to the reshaped data list
+            ##Append a new row to the reshaped data list
             reshaped_rows.append({'Model_Manufacturer_name': manufacturer_name,
                                   'Collectible_item_full_name': item,
                                   'Brand': brand, 'Model': model, 'Year': year})
 
-# Convert the list of dictionaries to a DataFrame
+### Convert the list of dictionaries to a DataFrame
 reshaped_data = pd.DataFrame(reshaped_rows)
 
-# Filter for valid entries where 'Model_Manufacturer_name' is not missing
+### Filter for valid entries where 'Model_Manufacturer_name' is not missing
 valid_data = reshaped_data[reshaped_data['Model_Manufacturer_name'].notna()]
 
-# Count missing 'Brand' values in the valid data
+### Count missing 'Brand' values in the valid data
 missing_brands_count = valid_data[valid_data['Brand'].isnull()].shape[0]
 print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufacturer_name': {missing_brands_count}")
 
-# Count missing 'Year' values in the valid data
+### Count missing 'Year' values in the valid data
 missing_years_count = valid_data[valid_data['Year'].isnull()].shape[0]
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_years_count}")
 
-# Filter entries without a brand
+### Filter entries without a brand
 entries_without_brand = valid_data[valid_data['Brand'].isnull()]
 
-# Display entries without a brand
+### Display entries without a brand
 print("Entries without a brand:")
 display(entries_without_brand)
 
-# If you need to save or export the cleaned data:
+### If you need to save or export the cleaned data:
 cleaned_data.to_csv('/kaggle/working/cleaned_data_v2_list_missing-brand-only.csv', index=False)
 
 
@@ -252,23 +252,23 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+### Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Function to extract brand, model, and year, with enhanced regex
+### Function to extract brand, model, and year, with enhanced regex
 def extract_info_improved(text):
-    # Normalize the text by removing known noise patterns and handling edge cases
+    ##Normalize the text by removing known noise patterns and handling edge cases
     text = str(text)
-    text = re.sub(r'\s+\(.*?\)', '', text)  # Remove any content inside parentheses
-    text = re.sub(r'\s-\s.*', '', text)     # Remove descriptions after a dash
-    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  # Remove isolated numbers that are not part of a four-digit year
-    text = text.replace(',', '')  # Remove commas that might be used as separators
+    text = re.sub(r'\s+\(.*?\)', '', text)  ##Remove any content inside parentheses
+    text = re.sub(r'\s-\s.*', '', text)     ##Remove descriptions after a dash
+    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  ##Remove isolated numbers that are not part of a four-digit year
+    text = text.replace(',', '')  ##Remove commas that might be used as separators
 
-    # Enhanced regex pattern to handle various cases
+    ##Enhanced regex pattern to handle various cases
     pattern = (
-        r'^(?P<Brand>\D+?)'             # Capture the brand as non-digit characters at the start
-        r'\s+(?P<Model>.*?)'            # Capture the model which might include numbers
-        r'(\s+(?P<Year>\d{4}))?$'       # Optionally capture a four-digit year at the end
+        r'^(?P<Brand>\D+?)'             ##Capture the brand as non-digit characters at the start
+        r'\s+(?P<Model>.*?)'            ##Capture the model which might include numbers
+        r'(\s+(?P<Year>\d{4}))?$'       ##Optionally capture a four-digit year at the end
     )
     match = re.match(pattern, text)
     if match:
@@ -278,7 +278,7 @@ def extract_info_improved(text):
         return brand, model, year
     return None, None, None
 
-# Process each item, reshape data
+### Process each item, reshape data
 reshaped_rows = []
 for col in data.columns:
     manufacturer_name = col.split('_')[0]
@@ -291,19 +291,19 @@ for col in data.columns:
                 'Brand': brand, 'Model': model, 'Year': year
             })
 
-# Convert reshaped_rows into a DataFrame
+### Convert reshaped_rows into a DataFrame
 reshaped_data = pd.DataFrame(reshaped_rows)
 
-# Filter for valid entries where 'Model_Manufacturer_name' is not empty
+### Filter for valid entries where 'Model_Manufacturer_name' is not empty
 valid_data = reshaped_data[reshaped_data['Model_Manufacturer_name'].notna()]
 
-# Count and print missing 'Brand' and 'Year' values excluding missing 'Model_Manufacturer_name'
+### Count and print missing 'Brand' and 'Year' values excluding missing 'Model_Manufacturer_name'
 missing_brands_count = valid_data[valid_data['Brand'].isnull()].shape[0]
 missing_years_count = valid_data[valid_data['Year'].isnull()].shape[0]
 print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufacturer_name': {missing_brands_count}")
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_years_count}")
 
-# Convert to DataFrame, export, and display
+### Convert to DataFrame, export, and display
 reshaped_data.to_csv('/kaggle/working/cleaned_data_v3_multiCol_292-missing-brand.csv', index=False)
 
 display(reshaped_data.head())
@@ -317,27 +317,27 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+### Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Common color names for regex (this list can be extended)
+### Common color names for regex (this list can be extended)
 colors = "black|white|red|green|blue|yellow|silver|grey|orange|purple|gold|bronze|brown"
 
-# Function to extract brand, model, year, and color, with enhanced regex
+### Function to extract brand, model, year, and color, with enhanced regex
 def extract_info_improved(text):
-    # Normalize the text by removing known noise patterns and handling edge cases
+    ##Normalize the text by removing known noise patterns and handling edge cases
     text = str(text)
-    text = re.sub(r'\s+\(.*?\)', '', text)  # Remove any content inside parentheses
-    text = re.sub(r'\s-\s.*', '', text)     # Remove descriptions after a dash
-    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  # Remove isolated numbers that are not part of a four-digit year
-    text = text.replace(',', '')  # Remove commas that might be used as separators
+    text = re.sub(r'\s+\(.*?\)', '', text)  ##Remove any content inside parentheses
+    text = re.sub(r'\s-\s.*', '', text)     ##Remove descriptions after a dash
+    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  ##Remove isolated numbers that are not part of a four-digit year
+    text = text.replace(',', '')  ##Remove commas that might be used as separators
 
-    # Enhanced regex pattern to handle various cases including color
+    ####Enhanced regex pattern to handle various cases including color
     pattern = (
-        rf'^(?P<Brand>\D+?)'             # Capture the brand as non-digit characters at the start
-        r'\s+(?P<Model>.*?)'             # Capture the model which might include numbers
-        r'(\s+(?P<Year>\d{{4}}))?'       # Optionally capture a four-digit year at the end
-        rf'(\s+(?P<Color>{colors}))?$'   # Optionally capture a color at the end
+        rf'^(?P<Brand>\D+?)'             ##Capture the brand as non-digit characters at the start
+        r'\s+(?P<Model>.*?)'             ##Capture the model which might include numbers
+        r'(\s+(?P<Year>\d{{4}}))?'       ##Optionally capture a four-digit year at the end
+        rf'(\s+(?P<Color>{colors}))?$'   ##Optionally capture a color at the end
     )
     match = re.match(pattern, text)
     if match:
@@ -348,7 +348,7 @@ def extract_info_improved(text):
         return brand, model, year, color
     return None, None, None, None
 
-# Process each item, reshape data
+####Process each item, reshape data
 reshaped_rows = []
 for col in data.columns:
     manufacturer_name = col.split('_')[0]
@@ -364,19 +364,19 @@ for col in data.columns:
                 'Color': color
             })
 
-# Convert reshaped_rows into a DataFrame
+####Convert reshaped_rows into a DataFrame
 reshaped_data = pd.DataFrame(reshaped_rows)
 
-# Filter for valid entries where 'Model_Manufacturer_name' is not empty
+####Filter for valid entries where 'Model_Manufacturer_name' is not empty
 valid_data = reshaped_data[reshaped_data['Model_Manufacturer_name'].notna()]
 
-# Count and print missing 'Brand' and 'Year' values excluding missing 'Model_Manufacturer_name'
+####Count and print missing 'Brand' and 'Year' values excluding missing 'Model_Manufacturer_name'
 missing_brands_count = valid_data[valid_data['Brand'].isnull()].shape[0]
 missing_years_count = valid_data[valid_data['Year'].isnull()].shape[0]
 print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufacturer_name': {missing_brands_count}")
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_years_count}")
 
-# Display the head of the DataFrame to confirm the extraction
+####Display the head of the DataFrame to confirm the extraction
 display(reshaped_data.head())
 
 ```
@@ -386,27 +386,27 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+####Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Common color names for regex (this list can be extended)
+####Common color names for regex (this list can be extended)
 colors = "black|white|red|green|blue|yellow|silver|grey|orange|purple|gold|bronze|brown"
 
-# Function to extract brand, model, year, and color, with enhanced regex
+####Function to extract brand, model, year, and color, with enhanced regex
 def extract_info_improved(text):
-    # Normalize the text by removing known noise patterns and handling edge cases
+    ##Normalize the text by removing known noise patterns and handling edge cases
     text = str(text)
-    text = re.sub(r'\s+\(.*?\)', '', text)  # Remove any content inside parentheses
-    text = re.sub(r'\s-\s.*', '', text)     # Remove descriptions after a dash
-    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  # Remove isolated numbers that are not part of a four-digit year
-    text = text.replace(',', '')  # Remove commas that might be used as separators
+    text = re.sub(r'\s+\(.*?\)', '', text)  ##Remove any content inside parentheses
+    text = re.sub(r'\s-\s.*', '', text)     ##Remove descriptions after a dash
+    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  ##Remove isolated numbers that are not part of a four-digit year
+    text = text.replace(',', '')  ##Remove commas that might be used as separators
 
-    # Enhanced regex pattern to handle various cases including color
+    ####Enhanced regex pattern to handle various cases including color
     pattern = (
-        rf'^(?P<Brand>\D+?)'             # Capture the brand as non-digit characters at the start
-        r'\s+(?P<Model>.*?)'             # Capture the model which might include numbers
-        r'(\s+(?P<Year>\d{{4}}))?'       # Optionally capture a four-digit year at the end
-        rf'(\s+(?P<Color>{colors}))?$'   # Optionally capture a color at the end
+        rf'^(?P<Brand>\D+?)'             ##Capture the brand as non-digit characters at the start
+        r'\s+(?P<Model>.*?)'             ##Capture the model which might include numbers
+        r'(\s+(?P<Year>\d{{4}}))?'       ##Optionally capture a four-digit year at the end
+        rf'(\s+(?P<Color>{colors}))?$'   ##Optionally capture a color at the end
     )
     match = re.match(pattern, text)
     if match:
@@ -417,7 +417,7 @@ def extract_info_improved(text):
         return brand, model, year, color
     return None, None, None, None
 
-# Process each item, reshape data
+####Process each item, reshape data
 reshaped_rows = []
 for col in data.columns:
     manufacturer_name = col.split('_')[0]
@@ -433,13 +433,13 @@ for col in data.columns:
                 'Color': color
             })
 
-# Convert reshaped_rows into a DataFrame
+####Convert reshaped_rows into a DataFrame
 reshaped_data = pd.DataFrame(reshaped_rows)
 
-# Filter for valid entries where 'Model_Manufacturer_name' is not empty
+####Filter for valid entries where 'Model_Manufacturer_name' is not empty
 valid_data = reshaped_data[reshaped_data['Model_Manufacturer_name'].notna()]
 
-# Count and print missing 'Brand', 'Year', and 'Color' values excluding missing 'Model_Manufacturer_name'
+####Count and print missing 'Brand', 'Year', and 'Color' values excluding missing 'Model_Manufacturer_name'
 missing_brands_count = valid_data[valid_data['Brand'].isnull()].shape[0]
 missing_years_count = valid_data[valid_data['Year'].isnull()].shape[0]
 missing_colors_count = valid_data[valid_data['Color'].isnull()].shape[0]
@@ -447,7 +447,7 @@ print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufac
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_years_count}")
 print(f"Number of entries with missing 'Color', excluding missing 'Model_Manufacturer_name': {missing_colors_count}")
 
-# Display the head of the DataFrame to confirm the extraction
+####Display the head of the DataFrame to confirm the extraction
 display(reshaped_data.head())
 
 ```
@@ -461,12 +461,12 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Simulating the loading of the dataset
+### Simulating the loading of the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Function to extract brand, model, and year with robust error handling
+### Function to extract brand, model, and year with robust error handling
 def extract_info_improved(text):
-    text = str(text)  # Ensure text is a string
+    text = str(text)  ##Ensure text is a string
     pattern = (
         r'^(?P<Brand>\D+?)'             
         r'\s+(?P<Model>.*?)'            
@@ -481,10 +481,10 @@ def extract_info_improved(text):
     else:
         return None, None, None
 
-# Initialize counter for unique ID generation
+### Initialize counter for unique ID generation
 counter = 1
 
-# Process each item, reshape data
+### Process each item, reshape data
 reshaped_rows = []
 for col in data.columns:
     manufacturer_name = col.split('_')[0]
@@ -499,10 +499,10 @@ for col in data.columns:
             })
             counter += 1
 
-# Convert to DataFrame
+### Convert to DataFrame
 df_a = pd.DataFrame(reshaped_rows)
 
-# Reporting missing data and total entries
+##Reporting missing data and total entries
 total_entries = len(df_a)
 missing_brand = df_a['Brand'].isnull().sum()
 missing_year = df_a['Year'].isnull().sum()
@@ -511,7 +511,7 @@ print(f"Total number of entries: {total_entries}")
 print(f"Number of entries with missing 'Brand': {missing_brand}")
 print(f"Number of entries with missing 'Year': {missing_year}")
 
-# Display the DataFrame to verify results
+##Display the DataFrame to verify results
 display(df_a.head())
 
 ```
@@ -525,27 +525,27 @@ import pandas as pd
 import re
 from IPython.display import display
 
-# Read the dataset
+### Read the dataset
 data = pd.read_excel('/kaggle/input/cars-catalogue-main-raw/Cars catalogue Main_RAW.xlsx')
 
-# Common color names for regex (this list can be extended)
+### Common color names for regex (this list can be extended)
 colors = "black|white|red|green|blue|yellow|silver|grey|orange|purple|gold|bronze|brown"
 
-# Function to extract brand, model, year, and color, with enhanced regex
+### Function to extract brand, model, year, and color, with enhanced regex
 def extract_info_improved(text):
-    # Normalize the text by removing known noise patterns and handling edge cases
+    ##Normalize the text by removing known noise patterns and handling edge cases
     text = str(text)
-    text = re.sub(r'\s+\(.*?\)', '', text)  # Remove any content inside parentheses
-    text = re.sub(r'\s-\s.*', '', text)     # Remove descriptions after a dash
-    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  # Remove isolated numbers that are not part of a four-digit year
-    text = text.replace(',', '')  # Remove commas that might be used as separators
+    text = re.sub(r'\s+\(.*?\)', '', text)  ##Remove any content inside parentheses
+    text = re.sub(r'\s-\s.*', '', text)     ##Remove descriptions after a dash
+    text = re.sub(r"\b(?<!\d)(?!\d{4})\d+\b", "", text)  ##Remove isolated numbers that are not part of a four-digit year
+    text = text.replace(',', '')  ##Remove commas that might be used as separators
 
-    # Enhanced regex pattern to handle various cases including color
+    ####Enhanced regex pattern to handle various cases including color
     pattern = (
-        rf'^(?P<Brand>\D+?)'             # Capture the brand as non-digit characters at the start
-        r'\s+(?P<Model>.*?)'             # Capture the model which might include numbers
-        r'(\s+(?P<Year>\d{{4}}))?'       # Optionally capture a four-digit year at the end
-        rf'(\s+(?P<Color>{colors}))?$'   # Optionally capture a color at the end
+        rf'^(?P<Brand>\D+?)'             ##Capture the brand as non-digit characters at the start
+        r'\s+(?P<Model>.*?)'             ##Capture the model which might include numbers
+        r'(\s+(?P<Year>\d{{4}}))?'       ##Optionally capture a four-digit year at the end
+        rf'(\s+(?P<Color>{colors}))?$'   ##Optionally capture a color at the end
     )
     match = re.match(pattern, text)
     if match:
@@ -557,10 +557,10 @@ def extract_info_improved(text):
     else:
         return None, None, None, None
 
-# Initialize counter for unique ID generation
+### Initialize counter for unique ID generation
 counter = 1
 
-# Process each item, reshape data
+### Process each item, reshape data
 reshaped_rows = []
 for col in data.columns:
     manufacturer_name = col.split('_')[0]
@@ -575,10 +575,10 @@ for col in data.columns:
             })
             counter += 1
 
-# Convert reshaped_rows into a DataFrame
+### Convert reshaped_rows into a DataFrame
 df_b = pd.DataFrame(reshaped_rows)
 
-# Reporting missing data and total entries
+### Reporting missing data and total entries
 total_entries = len(df_b)
 missing_brand = df_b['Brand'].isnull().sum()
 missing_year = df_b['Year'].isnull().sum()
@@ -589,7 +589,7 @@ print(f"Number of entries with missing 'Brand': {missing_brand}")
 print(f"Number of entries with missing 'Year': {missing_year}")
 print(f"Number of entries with missing 'Color': {missing_color}")
 
-# Display the DataFrame to verify results
+### Display the DataFrame to verify results
 display(df_b.head())
 
 ```
@@ -601,22 +601,20 @@ This phase bridges the datasets that have been separately enhanced with year and
 ```python
 import pandas as pd
 
-# Assuming df_a and df_b have been previously defined and loaded as shown in the updated Code A and Code B
-
-# Merge df_a and df_b using the 'id' field
-# We take all columns from df_a and only the 'Color' column from df_b
+### Merge df_a and df_b using the 'id' field
+### We take all columns from df_a and only the 'Color' column from df_b
 merged_data = pd.merge(df_a, df_b[['id', 'Color']], on='id', how='left')
 
-# Reorder the columns to place 'id' before 'Model_Manufacturer_name'
+### Reorder the columns to place 'id' before 'Model_Manufacturer_name'
 column_order = ['id', 'Model_Manufacturer_name'] + [col for col in merged_data.columns if col not in ['id', 'Model_Manufacturer_name']]
 merged_data = merged_data[column_order]
 
-# We already have the Year information filled in df_a as needed, so we just need to add Color information
-# Color from df_b will overwrite the Color in df_a where it exists
+### We already have the Year information filled in df_a as needed, so we just need to add Color information
+### Color from df_b will overwrite the Color in df_a where it exists
 merged_data['Color'] = merged_data['Color'].combine_first(merged_data['Color'])
 
-# Now you have a DataFrame with all information merged where the 'Year' comes from df_a and 'Color' from df_b
-# Let's calculate missing data statistics to ensure everything aligns with expectations
+### Now you have a DataFrame with all information merged where the 'Year' comes from df_a and 'Color' from df_b
+### Let's calculate missing data statistics to ensure everything aligns with expectations
 total_entries = len(merged_data)
 missing_brand = merged_data['Brand'].isnull().sum()
 missing_year = merged_data['Year'].isnull().sum()
@@ -627,10 +625,10 @@ print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufac
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_year}")
 print(f"Number of entries with missing 'Color', excluding missing 'Model_Manufacturer_name': {missing_color}")
 
-# Export the merged data to an Excel file
+### Export the merged data to an Excel file
 merged_data.to_excel('cleaned_data_cars_catalogue_v5_final.xlsx', index=False)
 
-# Display the DataFrame to verify results
+### Display the DataFrame to verify results
 display(merged_data.head())
 
 ```
@@ -648,16 +646,16 @@ In this initial phase of cleaning our data, we turn our attention to the 'Brand'
 ```python
 import pandas as pd
 
-# Assuming 'merged_data' is your DataFrame containing the data
-# Extract unique brands and sort them alphabetically
+### Assuming 'merged_data' is your DataFrame containing the data
+### Extract unique brands and sort them alphabetically
 unique_brands = merged_data['Brand'].dropna().unique()
 unique_brands_sorted = sorted(unique_brands)
 
-# Display the total number of unique brands
+### Display the total number of unique brands
 total_unique_brands = len(unique_brands_sorted)
 print(f"Total number of unique brand names: {total_unique_brands}")
 
-# Show only the first 15 and last 15 sorted unique brands
+### Show only the first 15 and last 15 sorted unique brands
 print("\nUnique Brands (First 15):")
 for brand in unique_brands_sorted[:15]:
     print(brand)
@@ -674,18 +672,18 @@ for brand in unique_brands_sorted[-15:]:
 from fuzzywuzzy import fuzz
 from itertools import combinations
 
-# List to store potential typos
+### List to store potential typos
 potential_typos = []
 
-# Iterate through combinations of brands
+### Iterate through combinations of brands
 for brand1, brand2 in combinations(unique_brands_sorted, 2):
-    # Compute Levenshtein distance between pairs of brands
+    ##Compute Levenshtein distance between pairs of brands
     similarity_score = fuzz.ratio(brand1.lower(), brand2.lower())
-    # If similarity score is above a certain threshold, consider them potential typos
-    if similarity_score > 80:  # You can adjust this threshold as needed
+    ##If similarity score is above a certain threshold, consider them potential typos
+    if similarity_score > 80:  ##You can adjust this threshold as needed
         potential_typos.append((brand1, brand2, similarity_score))
 
-# Print potential typos
+### Print potential typos
 print("Potential Typos:")
 for typo_pair in potential_typos:
     print(f"{typo_pair[0]} - {typo_pair[1]} (Similarity Score: {typo_pair[2]})")
@@ -697,9 +695,9 @@ for typo_pair in potential_typos:
 ```python
 import pandas as pd
 
-# Assuming 'merged_data' is your DataFrame containing the data
+### Assuming 'merged_data' is your DataFrame containing the data
 
-# Define the correction dictionary with wrong and correct spellings
+##Define the correction dictionary with wrong and correct spellings
 corrections = {
     "ALFA": "Alfa",
     "ASTON": "Aston",
@@ -747,15 +745,15 @@ corrections = {
     "ЗИС": "ЗИС"
 }
 
-# Apply corrections to the 'Model_Manufacturer_name' column
+##Apply corrections to the 'Model_Manufacturer_name' column
 merged_data['Model_Manufacturer_name'] = merged_data['Model_Manufacturer_name'].replace(corrections)
 
-# Reorder the columns to place 'id' before 'Model_Manufacturer_name'
+##Reorder the columns to place 'id' before 'Model_Manufacturer_name'
 column_order = ['id', 'Model_Manufacturer_name'] + [col for col in merged_data.columns if col not in ['id', 'Model_Manufacturer_name']]
 merged_data = merged_data[column_order]
 
-# Now you have a DataFrame with corrected brand names
-# Let's calculate missing data statistics to ensure everything aligns with expectations
+##Now you have a DataFrame with corrected brand names
+##Let's calculate missing data statistics to ensure everything aligns with expectations
 total_entries = len(merged_data)
 missing_brand = merged_data['Brand'].isnull().sum()
 missing_year = merged_data['Year'].isnull().sum()
@@ -766,11 +764,11 @@ print(f"Number of entries with missing 'Brand', excluding missing 'Model_Manufac
 print(f"Number of entries with missing 'Year', excluding missing 'Model_Manufacturer_name': {missing_year}")
 print(f"Number of entries with missing 'Color', excluding missing 'Model_Manufacturer_name': {missing_color}")
 
-# Export the merged data to a CSV file
+##Export the merged data to a CSV file
 merged_data.to_csv('cleaned_data_cars_merged.csv', index=False)
 
-# Display the DataFrame to verify results
-display(merged_data.head())  # Modify this to display(merged_data) if you want to see the entire DataFrame
+##Display the DataFrame to verify results
+display(merged_data.head())  ##Modify this to display(merged_data) if you want to see the entire DataFrame
 
 ```
 
